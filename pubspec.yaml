@@ -1,0 +1,37 @@
+name: stress_analysis_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # 카메라 및 오디오 관련 패키지
+  camera: ^0.10.5+2
+  audioplayers: ^5.2.1
+  flutter_sound: ^9.2.13
+  record: ^6.0.0
+
+  # 소셜 로그인
+  kakao_flutter_sdk_user: ^1.4.3
+  google_sign_in: ^6.1.5
+  flutter_naver_login: ^1.7.0 # ✅ 네이버 로그인 추가
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/camera_icon.png
+    - assets/logo.png
