@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_naver_login:
+    path: packages/flutter_naver_login
+
   cupertino_icons: ^1.0.8
 
   # 카메라 및 오디오 관련 패키지
@@ -22,7 +25,6 @@ dependencies:
   # 소셜 로그인
   kakao_flutter_sdk_user: ^1.4.3
   google_sign_in: ^6.1.5
-  flutter_naver_login: ^1.7.0 # ✅ 네이버 로그인 추가
 
 dev_dependencies:
   flutter_test:

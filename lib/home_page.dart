@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'login_page.dart';
 import 'camera_screen.dart';
 import 'my_page.dart';
 

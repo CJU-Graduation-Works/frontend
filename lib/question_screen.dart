@@ -111,7 +111,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ],
                   ),
                 );
-              }).toList(),
+              }),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
