@@ -15,6 +15,7 @@ dependencies:
     path: packages/flutter_naver_login
 
   cupertino_icons: ^1.0.8
+  http: ^1.1.0
 
   # 카메라 및 오디오 관련 패키지
   camera: ^0.10.5+2

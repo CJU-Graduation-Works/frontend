@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login_page.dart'; // LoginPage 사용을 위해 임포트
+
 class LogoutPage extends StatelessWidget {
   const LogoutPage({super.key});
 
@@ -37,8 +39,13 @@ class LogoutPage extends StatelessWidget {
                     backgroundColor: Color(0xFF3B82F6), // 파란색 예 버튼
                   ),
                   onPressed: () {
-                    // 로그인 상태 초기화 로직
-                    Navigator.of(context).popUntil((route) => route.isFirst); // 첫 화면으로 돌아가기
+                    // 로그인 상태 초기화 로직 (서버 로그아웃 또는 로컬 정보 삭제)
+                    // TODO: 로컬에 저장된 로그인 정보(예: 토큰) 삭제 로직 추가 필요
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginPage()), // 로그인 페이지로 이동
+                      (route) => false, // 이전 모든 라우트 제거
+                    );
                   },
                   child: const Text(
                     '예',

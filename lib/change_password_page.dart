@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http; // http 패키지 import
+import 'dart:convert'; // JSON 처리를 위한 import
+// import 'package:shared_preferences/shared_preferences.dart'; // SharedPreferences import 제거
+import 'user_data.dart'; // UserData import
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -20,10 +24,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     super.dispose();
   }
 
-  void _changePassword() {
-    final current = currentPasswordController.text;
-    final newPw = newPasswordController.text;
-    final confirm = confirmPasswordController.text;
+  void _changePassword() async { // async 키워드 추가
+    final current = currentPasswordController.text.trim();
+    final newPw = newPasswordController.text.trim();
+    final confirm = confirmPasswordController.text.trim();
 
     if (newPw != confirm) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -32,11 +36,57 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       return;
     }
 
-    // 실제 비밀번호 변경 로직은 여기에 추가 (예: 서버 요청)
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('비밀번호가 변경되었습니다.')),
-    );
-    Navigator.pop(context); // 성공 후 이전 화면으로
+    if (current.isEmpty || newPw.isEmpty || confirm.isEmpty) {
+       ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('모든 필드를 입력해주세요.')),
+      );
+      return;
+    }
+
+    final userEmail = UserData.email; // UserData에서 로그인된 사용자 이메일 가져오기
+
+    if (userEmail == null || userEmail.isEmpty) { // UserData.email이 null 또는 비어있는 경우
+      // 로그인된 사용자 이메일이 없는 경우 (예: 앱이 비정상 종료 후 재실행)
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('로그인 정보가 없습니다. 다시 로그인해주세요.')),
+      );
+      // TODO: 로그인 페이지로 이동하는 로직 추가
+      return;
+    }
+
+    try {
+      final url = Uri.parse('http://localhost:8080/api/auth/change-password'); // 백엔드 비밀번호 변경 엔드포인트
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': userEmail, // 저장된 이메일 사용
+          'currentPassword': current,
+          'newPassword': newPw,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // 비밀번호 변경 성공
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('비밀번호가 성공적으로 변경되었습니다.')),
+        );
+        Navigator.pop(context); // 성공 후 이전 화면으로
+      } else {
+        // 비밀번호 변경 실패 (서버 응답 오류)
+         final errorBody = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('비밀번호 변경 실패: ${errorBody['message'] ?? '알 수 없는 오류'}')),
+        );
+      }
+    } catch (e) {
+      // 네트워크 오류 등 예외 발생
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('비밀번호 변경 중 오류 발생: ${e.toString()}')),
+      );
+    }
   }
 
   @override

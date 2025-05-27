@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'screens/login_screen.dart';
+import 'screens/signup_screen.dart';
 import 'splash_page.dart';
 
 void main() async {
@@ -25,7 +27,12 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const SplashPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashPage(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
+      },
     );
   }
 }

@@ -94,17 +94,20 @@ class WelcomePage extends StatelessWidget {
                 // 카카오 로그인 버튼
                 ElevatedButton.icon(
                   onPressed: () => _kakaoLogin(context),
-                  icon: const Icon(Icons.chat_bubble_outline, color: Colors.black),
+                  icon: const Icon(Icons.chat_bubble_outline, color: Colors.black87),
                   label: const Text(
                     '카카오 계정으로 시작하기',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.black87, fontSize: 16),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFEE500),
+                    foregroundColor: Colors.black87,
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
+                    elevation: 3,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -112,17 +115,20 @@ class WelcomePage extends StatelessWidget {
                 // 구글 로그인 버튼
                 ElevatedButton.icon(
                   onPressed: () => _googleLogin(context),
-                  icon: const Icon(Icons.g_mobiledata, color: Colors.white),
+                  icon: const Icon(Icons.g_mobiledata, color: Colors.white, size: 30),
                   label: const Text(
                     'Google 계정으로 시작하기',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
+                    foregroundColor: Colors.white,
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
+                    elevation: 3,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -137,8 +143,10 @@ class WelcomePage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
+                    elevation: 3,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
-                  child: const Text('이메일 로그인(ID/비번찾기)'),
+                  child: const Text('이메일 로그인(ID/비번찾기)', style: TextStyle(fontSize: 16)),
                 ),
                 const SizedBox(height: 10),
 
@@ -152,8 +160,10 @@ class WelcomePage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
+                    elevation: 3,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
-                  child: const Text('이메일로 가입'),
+                  child: const Text('이메일로 가입', style: TextStyle(fontSize: 16)),
                 ),
               ],
             ),
